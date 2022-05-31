@@ -1,0 +1,35 @@
+@import url(../vendor/normalize.css);
+@import url(../blocks/root/root.css);
+@import url(../vendor/fonts/Inter/inter.css);
+/* Общие стили */
+
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+/* Стили для шапки */
+
+@import url(../blocks/line/line.css);
+/* Стили для линии, которую можно переиспользовать в другом месте этого сайта. Её я вынес отдельным блоком */
+
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__about/profile__about.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__name-container/profile__name-container.css);
+@import url(../blocks/profile/__name/profile__name.css);
+/* Стили для секции profile */
+
+@import url(../blocks/places/places.css);
+@import url(../blocks/places/__list/places__list.css);
+@import url(../blocks/place/__image/place__image.css);
+@import url(../blocks/place/__name/place__name.css);
+@import url(../blocks/place/__container/place__container.css);
+@import url(../blocks/place/place.css);
+/* Стили для секции place */
+
+@import url(../blocks/like-button/like-button.css);
+/* Стили для кнопки лайка */
+
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
+/* Стили для футера */
