@@ -1,0 +1,11 @@
+.button_type_like{
+  background-image: url(../../images/like.svg);
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (max-width: 779px) {
+  .button_type_like{
+    margin-right: 5px;
+  }
+}

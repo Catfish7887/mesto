@@ -1,0 +1,13 @@
+.popup{
+  /* max-width: 330px; */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 195px;
+  left: 33%;
+  border-radius: 10px;
+  z-index: 2;
+  display: none;
+}

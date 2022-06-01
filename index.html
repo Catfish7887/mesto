@@ -12,7 +12,6 @@
 <body class="root">
   <header class="header">
     <img src="./images/logo.svg" alt="Лого" class="header__logo" />
-    <div class="line"></div>
   </header>
   <main class="main">
     <section class="profile">
@@ -20,10 +19,16 @@
       <div class="profile__name-container">
         <p class="profile__name">Жак-Ив Кусто</p>
         <p class="profile__about">Исследователь океана</p>
-        <button class="profile__edit-button"></button>
+        <button class="button button_type_edit"></button>
       </div>
-      <button class="profile__add-button">
-      </button>
+      <button class="button button_type_add"></button>
+      <div class="popup">
+        <p class="popup__name">Редактировать профиль</p>
+        <input type="text" class="input input_type_name">
+        <input type="text" class="input input_type_about">
+        <button type="submit" class="button button_type_submit">Сохранить</button>
+        <button class="button button_type_edit"></button>
+      </div>
     </section>
     <section class="places">
       <ul class="places__list">
@@ -31,14 +36,14 @@
           <img src="./images/kar4.png" alt="Карачаевск" class="place__image" />
           <div class="place__container">
             <p class="place__name">Карачаевск</p>
-            <button class="like-button"></button>
+            <button class="button button_type_like"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/Elb.png" alt="Гора Эльбрус" class="place__image" />
           <div class="place__container">
             <p class="place__name">Гора Эльбрус</p>
-            <button class="like-button"></button>
+            <button class="button button_type_like"></button>
           </div>
         </li>
         <li class="place">
@@ -46,7 +51,7 @@
 
           <div class="place__container">
             <p class="place__name">Домбай</p>
-            <button class="like-button"></button>
+            <button class="button button_type_like"></button>
           </div>
         </li>
         <li class="place">
@@ -54,7 +59,7 @@
 
           <div class="place__container">
             <p class="place__name">Гора Эльбрус</p>
-            <button class="like-button"></button>
+            <button class="button button_type_like"></button>
           </div>
         </li>
         <li class="place">
@@ -62,14 +67,14 @@
 
           <div class="place__container">
             <p class="place__name">Домбай</p>
-            <button class="like-button"></button>
+            <button class="button button_type_like"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/kar4.png" alt="Карачаево-Черкессия" class="place__image" />
           <div class="place__container">
             <p class="place__name">Карачаево-Черкессия</p>
-            <button class="like-button"></button>
+            <button class="button button_type_like"></button>
           </div>
         </li>
       </ul>
