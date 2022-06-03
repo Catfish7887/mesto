@@ -22,13 +22,16 @@
         <button class="button button_type_edit"></button>
       </div>
       <button class="button button_type_add"></button>
-      <div class="popup">
-        <p class="popup__name">Редактировать профиль</p>
-        <input type="text" class="input input_type_name">
-        <input type="text" class="input input_type_about">
-        <button type="submit" class="button button_type_submit">Сохранить</button>
-        <button class="button button_type_edit"></button>
+      <div class="popup popup_hidden">
+        <div class="popup__container">
+          <p class="popup__name">Редактировать профиль</p>
+          <form type="text" class="input input_type_name">Жак-Ив Кусто</form>
+          <form type="text" class="input input_type_about">Исследователь океана</form>
+          <button type="submit" class="button button_type_submit">Сохранить</button>
+          <button class="button button_type_close"></button>
+        </div>
       </div>
+
     </section>
     <section class="places">
       <ul class="places__list">
@@ -83,7 +86,7 @@
   <footer class="footer">
     <small class="footer__copyright">&copy;2022. Daniil Kleutin</small>
   </footer>
-  <script src="./script.js"></script>
+  <script src="./pages/index.js"></script>
 </body>
 
 </html>

@@ -3,16 +3,18 @@
 @import url(../vendor/fonts/Inter/inter.css);
 /* Общие стили */
 
-@import url(../blocks/button/);
+@import url(../blocks/button/button.css);
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/_type/button_type_like.css);
 @import url(../blocks/button/_type/button_type_like-active.css);
 @import url(../blocks/button/_type/button_type_submit.css);
+@import url(../blocks/button/_type/button_type_close.css);
 /* Стили дял кнопок */
 
 @import url(../blocks/popup/popup.css);
-@import url();
+@import url(../blocks/popup/_hidden/popup_hidde.css);
+@import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__submit/popup__submit-btn.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
@@ -21,7 +23,7 @@
 @import url(../blocks/input/input.css);
 @import url(../blocks/input/_type/input_type_about.css);
 @import url(../blocks/input/_type/input_type_name.css);
-/* Стили для input'a */
+/* Стили для input'ов */
 
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
