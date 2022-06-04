@@ -3,6 +3,19 @@
   width: 32px;
   height: 32px;
   position: absolute;
-  top: -35px;
-  right: -35px;
+  top: -40px;
+  right: -40px;
 }
+
+@media screen and (max-width: 779px) {
+  .button_type_close{
+    width: 20;
+    height: 20px;
+    right: -10px;
+    top: -39px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+}
+

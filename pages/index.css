@@ -7,8 +7,6 @@
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/_type/button_type_like.css);
-@import url(../blocks/button/_type/button_type_like-active.css);
-@import url(../blocks/button/_type/button_type_submit.css);
 @import url(../blocks/button/_type/button_type_close.css);
 /* Стили дял кнопок */
 
@@ -16,13 +14,12 @@
 @import url(../blocks/popup/_hidden/popup_hidde.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__name/popup__name.css);
-@import url(../blocks/popup/__submit/popup__submit-btn.css);
-@import url(../blocks/popup/__close-btn/popup__close-btn.css);
 /* Стили для popup'a */
 
 @import url(../blocks/input/input.css);
 @import url(../blocks/input/_type/input_type_about.css);
 @import url(../blocks/input/_type/input_type_name.css);
+@import url(../blocks/input/_type/input_type_submit.css);
 /* Стили для input'ов */
 
 @import url(../blocks/header/header.css);
@@ -31,9 +28,7 @@
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__about/profile__about.css);
-@import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
-@import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__name-container/profile__name-container.css);
 @import url(../blocks/profile/__name/profile__name.css);
 /* Стили для секции profile */
@@ -46,9 +41,9 @@
 @import url(../blocks/place/place.css);
 /* Стили для секции place */
 
-@import url(../blocks/like-button/like-button.css);
-/* Стили для кнопки лайка */
-
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 /* Стили для футера */
+
+@import url(../blocks/form/form.css);
+/* Стили длня форм */

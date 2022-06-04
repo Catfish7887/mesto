@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Профиль</title>
+  <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 
@@ -24,10 +24,13 @@
       <button class="button button_type_add"></button>
       <div class="popup popup_hidden">
         <div class="popup__container">
-          <p class="popup__name">Редактировать профиль</p>
-          <form type="text" class="input input_type_name">Жак-Ив Кусто</form>
-          <form type="text" class="input input_type_about">Исследователь океана</form>
-          <button type="submit" class="button button_type_submit">Сохранить</button>
+          <form  class="form">
+            <p class="popup__name">Редактировать профиль</p>
+            <input type="text" placeholder="Имя" value="Жак-Ив Кусто" class="input input_type_name">
+            <input type="text" placeholder="Обо мне" value="Исследователь океана" class="input input_type_about">
+            <input type="submit" class="input input_type_submit" value="Сохранить">
+          </form>
+
           <button class="button button_type_close"></button>
         </div>
       </div>

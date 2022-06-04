@@ -1,4 +1,11 @@
 .input_type_about{
-  margin-top: 30px;
+  margin-top: 13px;
   margin-bottom: 48px;
+
+}
+
+@media screen and (max-width: 779px) {
+  .input_type_about{
+    margin-bottom: 45px;
+  }
 }

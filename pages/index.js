@@ -1,4 +1,4 @@
-
+// Код для попапа
 const popup = document.querySelector('.popup')
 const editBtn = document.querySelector('.button_type_edit');
 const closeBtn = document.querySelector('.button_type_close');
@@ -27,8 +27,25 @@ closeBtn.addEventListener('click', function(e){
   }
 } );
 
-// Код для попапа
+// Код для редактирования
 
-const name = document.querySelector('.input_type_name')
-console.log(name)
+let form = document.querySelector('.form');
+
+let InputName = document.querySelector('.input_type_name');
+let InputAbout = document.querySelector('.input_type_about');
+
+
+
+
+function submit(evt){
+  evt.preventDefault();
+  InputName.getAttribute('value');
+  InputAbout.getAttribute('value');
+  document.querySelector('.profile__name').textContent = InputName.value;
+  document.querySelector('.profile__about').textContent = InputAbout.value;
+  popupClose()
+
+}
+
+form.addEventListener('submit', submit);
 
