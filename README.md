@@ -14,7 +14,7 @@
 
 **Gh-pages**
 
-* [Ссылка на Gh-pages]()
+* [Ссылка на Gh-pages](https://catfish7887.github.io/mesto/)
 
 **Javascript**
 
