@@ -1,51 +1,35 @@
-// Код для попапа
+// Переменные
 const popup = document.querySelector('.popup')
-const editBtn = document.querySelector('.button_type_edit');
-const closeBtn = document.querySelector('.button_type_close');
-
-function popupOpen(){
-  popup.classList.remove('popup_hidden')
-}
-
-function popupClose(){
-  popup.classList.add('popup_hidden')
-}
-
-editBtn.addEventListener('click', function() {
-  popupOpen()
-});
-
-popup.addEventListener('click', function(e){
-  if (e.target === e.currentTarget){
-    popupClose()
-  }
-} );
-
-closeBtn.addEventListener('click', function(e){
-  if (e.target === e.currentTarget){
-    popupClose()
-  }
-} );
-
-// Код для редактирования
-
-let form = document.querySelector('.form');
-
-let InputName = document.querySelector('.input_type_name');
-let InputAbout = document.querySelector('.input_type_about');
+const form = document.querySelector('.popup__form');
+const editBtn = document.querySelector('.profile__edit-btn');
+const closeBtn = document.querySelector('.popup__close-btn');
+let inputName = document.querySelector('.popup__input_type_name');
+let inputAbout = document.querySelector('.popup__input_type_about');
+let name = document.querySelector('.profile__name');
+let about = document.querySelector('.profile__about');
 
 
+// Функции для popup
+function openPopup(){
+  popup.classList.add('popup_opened')
+};
+
+function closePopup(){
+  popup.classList.remove('popup_opened')
+};
 
 
+// Функция для отправки формы
 function submit(evt){
   evt.preventDefault();
-  InputName.getAttribute('value');
-  InputAbout.getAttribute('value');
-  document.querySelector('.profile__name').textContent = InputName.value;
-  document.querySelector('.profile__about').textContent = InputAbout.value;
-  popupClose()
+   name.textContent = inputName.value;
+   about.textContent = inputAbout.value;
+  closePopup()
+};
 
-}
 
+// Слушатели события
+editBtn.addEventListener('click', openPopup)
+closeBtn.addEventListener('click', closePopup)
 form.addEventListener('submit', submit);
 

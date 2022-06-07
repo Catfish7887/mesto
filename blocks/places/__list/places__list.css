@@ -22,6 +22,5 @@
   .places__list{
     grid-template-columns: repeat(1, minmax(min-content, max-content));
     grid-template-rows: repeat(6, minmax(min-content, max-content));
-
   }
 }

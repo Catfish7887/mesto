@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
   <title>Место</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
@@ -17,65 +17,57 @@
     <section class="profile">
       <img src="./images/Avatar.png" alt="Аватар пользователя" class="profile__avatar" />
       <div class="profile__name-container">
-        <p class="profile__name">Жак-Ив Кусто</p>
-        <p class="profile__about">Исследователь океана</p>
-        <button class="button button_type_edit"></button>
-      </div>
-      <button class="button button_type_add"></button>
-      <div class="popup popup_hidden">
-        <div class="popup__container">
-          <form class="form">
-            <p class="popup__name">Редактировать профиль</p>
-            <input type="text" placeholder="Имя" value="Жак-Ив Кусто" class="input input_type_name">
-            <input type="text" placeholder="Обо мне" value="Исследователь океана" class="input input_type_about">
-            <input type="submit" class="input input_type_submit" value="Сохранить">
-          </form>
-          <button class="button button_type_close"></button>
+        <div class="profile__flex-container">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button type="button" aria-label="Редактировать" class="profile__edit-btn"></button>
         </div>
+        <p class="profile__about">Исследователь океана</p>
       </div>
+      <button aria-label="Добавить" class="profile__add-btn"></button>
+
     </section>
     <section class="places">
       <ul class="places__list">
         <li class="place">
           <img src="./images/kar4.png" alt="Карачаевск" class="place__image" />
           <div class="place__container">
-            <p class="place__name">Карачаевск</p>
-            <button class="button button_type_like"></button>
+            <h2 class="place__name">Карачаевск</h2>
+            <button type="button" aria-label="Лайк" class="place__like-btn"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/Elb.png" alt="Гора Эльбрус" class="place__image" />
           <div class="place__container">
-            <p class="place__name">Гора Эльбрус</p>
-            <button class="button button_type_like"></button>
+            <h2 class="place__name">Гора Эльбрус</h2>
+            <button type="button" aria-label="Лайк" class="place__like-btn"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/Dombai.png" alt="Домбай" class="place__image" />
           <div class="place__container">
-            <p class="place__name">Домбай</p>
-            <button class="button button_type_like"></button>
+            <h2 class="place__name">Домбай</h2>
+            <button type="button" aria-label="Лайк" class="place__like-btn"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/Elb.png" alt="Гора Эльбрус" class="place__image" />
           <div class="place__container">
-            <p class="place__name">Гора Эльбрус</p>
-            <button class="button button_type_like"></button>
+            <h2 class="place__name">Гора Эльбрус</h2>
+            <button type="button" aria-label="Лайк" class="place__like-btn"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/Dombai.png" alt="Домбай" class="place__image" />
           <div class="place__container">
-            <p class="place__name">Домбай</p>
-            <button class="button button_type_like"></button>
+            <h2 class="place__name">Домбай</h2>
+            <button type="button" aria-label="Лайк" class="place__like-btn"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/kar4.png" alt="Карачаево-Черкессия" class="place__image" />
           <div class="place__container">
-            <p class="place__name">Карачаево-Черкессия</p>
-            <button class="button button_type_like"></button>
+            <h2 class="place__name">Карачаево-Черкессия</h2>
+            <button type="button" aria-label="Лайк" class="place__like-btn"></button>
           </div>
         </li>
       </ul>
@@ -84,6 +76,17 @@
   <footer class="footer">
     <small class="footer__copyright">&copy;2022. Daniil Kleutin</small>
   </footer>
+      <div class="popup">
+        <div class="popup__container">
+          <form name="popupForm" class="popup__form">
+            <h2 class="popup__name">Редактировать профиль</h2>
+            <input name="name" type="text" placeholder="Имя" value="Жак-Ив Кусто" class="popup__input popup__input_type_name">
+            <input name="about" type="text" placeholder="Обо мне" value="" class="popup__input popup__input_type_about">
+            <button type="submit" class="popup__submit-btn">Сохранить</button>
+          </form>
+          <button type="button" aria-label="Закрыть" class="popup__close-btn"></button>
+        </div>
+      </div>
   <script src="./pages/index.js"></script>
 </body>
 
