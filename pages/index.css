@@ -10,8 +10,6 @@
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__name/popup__name.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_about.css);
-@import url(../blocks/popup/__input/_type/popup__input_type_name.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
 @import url(../blocks/popup/__submit-btn/popup__submit-btn.css);
 /* Стили для popup'a */

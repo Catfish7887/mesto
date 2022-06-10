@@ -12,6 +12,8 @@ let about = document.querySelector('.profile__about');
 // Функции для popup
 function openPopup(){
   popup.classList.add('popup_opened')
+  inputName.value = name.textContent
+  inputAbout.value = about.textContent
 };
 
 function closePopup(){
