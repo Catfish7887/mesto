@@ -54,15 +54,23 @@ const initialPlaces = [
   }
 ];
 
+
+
+
+
 //ФУНКЦИИ
 //Функция для отрисовки мест из массива при первой загрузке сайта
 function renderPlace(item){
   const newPlace = placeTemplate.cloneNode(true);
+  const placeImage = newPlace.querySelector('.place__image');
+
   newPlace.querySelector('.place__delete-btn').addEventListener('click', deletePlace);
   newPlace.querySelector('.place__like-btn').addEventListener('click', like);
+  placeImage.addEventListener('click', openImagePopup)
+
   newPlace.querySelector('.place__name').innerText = item.name;
-  newPlace.querySelector('.place__image').src = item.link;
-  placeList.appendChild(newPlace);
+  placeImage.src = item.link;
+  placeList.prepend(newPlace)
 };
 
 // Функция для лайка
@@ -76,7 +84,7 @@ function deletePlace(e){
 };
 
 //Открыть попап редактирования профиля
-function editProfile(){
+function openEditPopup(){
   editPopup.classList.add('popup_opened');
   nameInput.value = profileName.innerText;
   aboutInput.value = profileAbout.innerText;
@@ -95,13 +103,49 @@ function closeEditPopup(){
   editPopup.classList.remove('popup_opened');
 };
 
+//Открыть попап добавления нового места
+function openAddPopup(){
+  addPopup.classList.add('popup_opened');
+
+};
+//Закрыть попап добавления нового места
+function closeAddPopup(){
+  addPopup.classList.remove('popup_opened');
+};
+
+//Отправка формы нового места
+function addPlace(e){
+  e.preventDefault();
+  const newPlace = {
+    name: '',
+    link: ''
+  }
+  newPlace.name = placeNameInput.value;
+  newPlace.link = urlInput.value;
+  renderPlace(newPlace);
 
 
+  closeAddPopup();
+};
 
+//Открыть попап с картинкой
+function openImagePopup(popup){
+  imagePopup.classList.add('popup_opened');
 
+};
+
+// Закрыть попам с картинкой
+function closeImagePopup(){
+  imagePopup.classList.remove('popup_opened')
+};
+
+initialPlaces.forEach(renderPlace);
 
 // Слушатели события
-profileEditBtn.addEventListener('click', editProfile);
+profileEditBtn.addEventListener('click', openEditPopup);
 saveBtn.addEventListener('click', saveProfile);
 editCloseBtn.addEventListener('click', closeEditPopup);
-initialPlaces.forEach(renderPlace);
+profileAddBtn.addEventListener('click', openAddPopup);
+addCloseBtn.addEventListener('click', closeAddPopup);
+imageCloseBtn.addEventListener('click', closeImagePopup);
+addBtn.addEventListener('click', addPlace);
