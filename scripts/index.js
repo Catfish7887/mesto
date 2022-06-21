@@ -13,10 +13,11 @@ const placeNameInput = addPopup.querySelector('#place-name');
 const urlInput = addPopup.querySelector('#url');
 const addBtn = addPopup.querySelector('.popup__submit-btn');
 const addCloseBtn = addPopup.querySelector('.popup__close-btn');
+
 //Popup image
 const imagePopup = document.querySelectorAll('.popup')[2];
-const imagePopupPicture = imagePopup.querySelector('.popup__place-image');
-const imageName = imagePopup.querySelector('popup__image-heading');
+const imagePopupPicture = imagePopup.querySelector('.popup__image');
+const imageName = imagePopup.querySelector('.popup__image-caption');
 const imageCloseBtn = imagePopup.querySelector('.popup__close-btn');
 //Элементы профиля
 const profileEditBtn = document.querySelector('.profile__edit-btn');
@@ -26,6 +27,7 @@ const profileAbout = document.querySelector('.profile__about');
 //Карточки с местами
 const placeTemplate = document.querySelector('.place-template').content;
 const placeList = document.querySelector('.places__list');
+
 // Массив с местами
 const initialPlaces = [
   {
@@ -59,18 +61,28 @@ const initialPlaces = [
 
 
 //ФУНКЦИИ
-//Функция для отрисовки мест из массива при первой загрузке сайта
+//Создать карточку с местом
 function renderPlace(item){
   const newPlace = placeTemplate.cloneNode(true);
   const placeImage = newPlace.querySelector('.place__image');
+  const placeName = newPlace.querySelector('.place__name');
 
   newPlace.querySelector('.place__delete-btn').addEventListener('click', deletePlace);
   newPlace.querySelector('.place__like-btn').addEventListener('click', like);
-  placeImage.addEventListener('click', openImagePopup)
+  placeImage.addEventListener('click', openImagePopup);
 
-  newPlace.querySelector('.place__name').innerText = item.name;
+  placeName.innerText = item.name;
   placeImage.src = item.link;
-  placeList.prepend(newPlace)
+  placeList.prepend(newPlace);
+
+  function openImagePopup(){
+    imagePopup.classList.add('popup_opened');
+    imagePopupPicture.src = placeImage.src;
+    imageName.innerText = placeName.innerText;
+
+  };
+
+
 };
 
 // Функция для лайка
@@ -123,16 +135,12 @@ function addPlace(e){
   newPlace.name = placeNameInput.value;
   newPlace.link = urlInput.value;
   renderPlace(newPlace);
-
-
+  placeNameInput.value = '';
+  urlInput.value = '';
   closeAddPopup();
 };
 
-//Открыть попап с картинкой
-function openImagePopup(popup){
-  imagePopup.classList.add('popup_opened');
 
-};
 
 // Закрыть попам с картинкой
 function closeImagePopup(){

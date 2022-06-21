@@ -12,6 +12,10 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
 @import url(../blocks/popup/__submit-btn/popup__submit-btn.css);
+@import url(../blocks/popup/__image-caption/popup__image-caption.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__figure-container/popup__figure-container.css);
+@import url(../blocks/popup/__container/_type/popup__container_type_image.css);
 /* Стили для popup'a */
 
 
@@ -37,6 +41,7 @@
 @import url(../blocks/place/place.css);
 @import url(../blocks/place/__like-btn/place__like-btn.css);
 @import url(../blocks/place/__like-btn/_active/place__like-btn_active.css);
+@import url(../blocks/place/__delete-btn/place__delete-btn.css);
 /* Стили для секции place */
 
 @import url(../blocks/footer/footer.css);
