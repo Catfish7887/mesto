@@ -66,15 +66,19 @@ function renderPlace(item){
   const newPlace = placeTemplate.cloneNode(true);
   const placeImage = newPlace.querySelector('.place__image');
   const placeName = newPlace.querySelector('.place__name');
+  const deleteBtn = newPlace.querySelector('.place__delete-btn');
+  const likeBtn = newPlace.querySelector('.place__like-btn');
 
-  newPlace.querySelector('.place__delete-btn').addEventListener('click', deletePlace);
-  newPlace.querySelector('.place__like-btn').addEventListener('click', like);
-  placeImage.addEventListener('click', openImagePopup);
 
   placeName.innerText = item.name;
   placeImage.src = item.link;
   placeList.prepend(newPlace);
 
+  deleteBtn.addEventListener('click', deletePlace);
+  likeBtn.addEventListener('click', like);
+  placeImage.addEventListener('click', openImagePopup);
+
+  // Функция открытия попапа с картинкой
   function openImagePopup(){
     imagePopup.classList.add('popup_opened');
     imagePopupPicture.src = placeImage.src;
@@ -132,9 +136,12 @@ function addPlace(e){
     name: '',
     link: ''
   }
+
   newPlace.name = placeNameInput.value;
   newPlace.link = urlInput.value;
+
   renderPlace(newPlace);
+
   placeNameInput.value = '';
   urlInput.value = '';
   closeAddPopup();
@@ -147,6 +154,7 @@ function closeImagePopup(){
   imagePopup.classList.remove('popup_opened')
 };
 
+
 initialPlaces.forEach(renderPlace);
 
 // Слушатели события
@@ -157,3 +165,10 @@ profileAddBtn.addEventListener('click', openAddPopup);
 addCloseBtn.addEventListener('click', closeAddPopup);
 imageCloseBtn.addEventListener('click', closeImagePopup);
 addBtn.addEventListener('click', addPlace);
+
+addBtn.addEventListener('keypress', (event) => {
+  if (event.code === 'Enter'){
+    closeAddPopup();
+  };
+});
+
