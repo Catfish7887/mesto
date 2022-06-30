@@ -37,10 +37,18 @@
 
   <div class="popup popup_type_edit">
     <div class="popup__container">
-      <form name="popupForm" class="popup__form">
+      <form name="popupForm" class="popup__form" novalidate>
         <h2 class="popup__name">Редактировать профиль</h2>
-        <input id="name" name="name" type="text" placeholder="Имя" class="popup__input ">
-        <input id="about" name="about" type="text" placeholder="Обо мне" class="popup__input">
+        <fieldset class="edit-fieldset">
+          <label for="name" class="">
+            <input id="name" name="name" type="text" placeholder="Имя" class="popup__input ">
+            <span class="popup__input-error"></span>
+          </label>
+          <label for="about" class="">
+            <input id="about" name="about" type="text" placeholder="Обо мне" class="popup__input">
+            <span class="popup__input-error"></span>
+          </label>
+        </fieldset>
         <button type="submit" class="popup__submit-btn">Сохранить</button>
       </form>
       <button type="button" aria-label="Закрыть" class="popup__close-btn"></button>
@@ -49,10 +57,18 @@
 
   <div class="popup popup_type_add">
     <div class="popup__container">
-      <form name="popupForm" class="popup__form">
+      <form name="popupForm" class="popup__form" novalidate>
         <h2 class="popup__name">Новое место</h2>
-        <input id="place-name" name="name" type="text" class="popup__input" placeholder="Название">
-        <input id="url" name="url" type="text" class="popup__input" placeholder="Ссылка на картинку">
+        <fieldset>
+          <label for="place-name" class="">
+            <input id="place-name" name="place-name" type="text" class="popup__input" placeholder="Название">
+            <span class="popup__input-error"></span>
+          </label>
+          <label for="url" class="">
+            <input id="url" name="url" type="text" class="popup__input" placeholder="Ссылка на картинку">
+            <span class="popup__input-error"></span>
+          </label>
+        </fieldset>
         <button type="submit" class="popup__submit-btn">Создать</button>
       </form>
       <button type="button" aria-label="Закрыть" class="popup__close-btn"></button>
@@ -80,6 +96,7 @@
   </template>
 
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>
