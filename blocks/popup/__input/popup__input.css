@@ -4,22 +4,25 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   padding-bottom: 13px;
-  padding-top: 13px;
   margin: 0;
   color: black;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+
 }
 
+.popup__input:focus{
+  outline: none;
+}
 
 .popup__input:first-of-type{
-  margin-top: 34px;
+  margin-top: 47px;
 }
 
 .popup__input:last-of-type{
-  margin-top: 13px;
-  margin-bottom: 44px;
+  margin-top: 12px;
+  margin-bottom: 0;
 }
 
 @media screen and (max-width: 779px) {
@@ -32,6 +35,6 @@
   }
 
   .popup__input:last-of-type{
-    margin-bottom: 45px;
+    margin-bottom: 0;
   }
 }

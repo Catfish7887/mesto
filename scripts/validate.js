@@ -12,7 +12,7 @@ const validConfig = {
 };
 
 
-//Проверка формы на наличие невалидного поля
+//Показывает сообщение об ошибке
 const showInputError = (formEl, inputEl, validationMessage, config) => {
   const errorEl = formEl.querySelector(`.${inputEl.id}-error`);
   errorEl.textContent = validationMessage;
@@ -20,7 +20,7 @@ const showInputError = (formEl, inputEl, validationMessage, config) => {
   errorEl.classList.add(config.errorClass);
 };
 
-
+//Прячет ошибку
 const hideInputError = (formEl, inputEl, config) => {
   const errorEl = formEl.querySelector(`.${inputEl.id}-error`);
   errorEl.classList.remove(config.errorClass);
@@ -28,7 +28,7 @@ const hideInputError = (formEl, inputEl, config) => {
   errorEl.textContent = '';
 };
 
-
+//Проверяет поле на валидность
 const isInputValid = (formEl, inputEl, config) => {
   if(!inputEl.validity.valid){
       showInputError(formEl, inputEl, inputEl.validationMessage, config);

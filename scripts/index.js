@@ -173,19 +173,11 @@ function openPopup(popup) {
 //Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  //Уберу слушатель события, чтобы избежать бага с повторным нажатием на клавишу при закрытом попапе
+  //Уберу слушатель события, чтобы избежать бага повторным нажатием на клавишу при закрытом попапе
   document.removeEventListener('keydown', closePopupByEsc)
 };
 
-
-
-
-
-
-
-
-
-
+// Функции ниже не являются основной логикой страницы. Они улучшают user experience
 function closePopupByEsc(e){
   if(e.key === 'Escape'){
     const openedPopup = document.querySelector('.popup_opened');
@@ -199,20 +191,6 @@ function closePopupByOverlay(e){
       closePopup(e.target)
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // Слушатели события

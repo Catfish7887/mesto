@@ -1,3 +1,25 @@
 .popup__input-error{
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
   color: red;
-}
+  margin-top: 3px;
+  opacity: 1;
+  display: block;
+  height: 15px;
+  width: 100%;
+  transition: opacity, 0.3s, ease;
+};
+
+
+.popup__input-error:last-of-type{
+  margin-bottom: 23px;
+
+};
+
+/* @media screen and (max-width: 779px) {
+  .popup__input-error{
+    width: 242px;
+  };
+}; */
