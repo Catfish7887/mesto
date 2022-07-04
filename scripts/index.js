@@ -30,7 +30,6 @@ const placeList = document.querySelector('.places__list');
 
 
 
-
 // Массив с местами
 const initialPlaces = [
   {
@@ -121,7 +120,14 @@ function openEditPopup(){
   openPopup(popupEdit);
   nameInput.value = profileName.innerText;
   aboutInput.value = profileAbout.innerText;
+  resetFormError(popupEdit, validConfig)
+};
 
+//Открыть попап добавления места
+function openAddPopup(){
+  formAdd.reset()
+  openPopup(popupAdd);
+  resetFormError(popupAdd, validConfig);
 };
 
 //Сохранить изменения профиля
@@ -149,28 +155,73 @@ function addPlace(e){
   formAdd.reset();
 
   closePopup(popupAdd);
+  resetFormError(popupAdd, validConfig);
 };
 
 
 //Общие функции для попапов
-// Открыть попап
+//Открыть попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
+  popup.addEventListener('mousedown', closePopupByOverlay)
 };
 
-// Закрыть попап
+
+
+
+//Закрыть попап
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  //Уберу слушатель события, чтобы избежать бага с повторным нажатием на клавишу при закрытом попапе
+  document.removeEventListener('keydown', closePopupByEsc)
 };
+
+
+
+
+
+
+
+
+
+
+function closePopupByEsc(e){
+  if(e.key === 'Escape'){
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
+};
+
+
+function closePopupByOverlay(e){
+    if(e.target.classList.contains('popup')){
+      closePopup(e.target)
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Слушатели события
 profileEditBtn.addEventListener('click', openEditPopup);
 formEdit.addEventListener('submit', saveProfile);
+profileAddBtn.addEventListener('click', openAddPopup);
+formAdd.addEventListener('submit', addPlace);
 popupEditCloseBtn.addEventListener('click', () => {closePopup(popupEdit)});
-profileAddBtn.addEventListener('click', () => {openPopup(popupAdd)});
 popupAddCloseBtn.addEventListener('click', () => {closePopup(popupAdd)});
 popupImageCloseBtn.addEventListener('click', () => {closePopup(imagePopup)});
-formAdd.addEventListener('submit', addPlace);
 
 

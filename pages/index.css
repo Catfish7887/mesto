@@ -19,6 +19,7 @@
 @import url(../blocks/popup/__form-fieldset/popup__form-fieldset.css);
 @import url(../blocks/popup/__input/_invalid/popup__input_invalid.css);
 @import url(../blocks/popup/__input-error/popup__input-error.css);
+@import url(../blocks/popup/__submit-btn/_inactive/popup__submit-btn_inactive.css);
 /* Стили для popup'a */
 
 
