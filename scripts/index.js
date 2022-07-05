@@ -5,19 +5,19 @@ const formEdit = popupEdit.querySelector('.popup__form');
 const nameInput = popupEdit.querySelector('#name');
 const aboutInput = popupEdit.querySelector('#about');
 const btnSave = popupEdit.querySelector('.popup__submit-btn');
-const popupEditCloseBtn = popupEdit.querySelector('.popup__close-btn');
+
 //Popup add
 const popupAdd = document.querySelector('.popup_type_add');
 const formAdd = popupAdd.querySelector('.popup__form');
 const placeNameInput = popupAdd.querySelector('#place-name');
 const urlInput = popupAdd.querySelector('#url');
 const btnAdd = popupAdd.querySelector('.popup__submit-btn');
-const popupAddCloseBtn = popupAdd.querySelector('.popup__close-btn');
+
 //Popup image
 const imagePopup = document.querySelector('.popup_type_image');
 const imagePopupPicture = imagePopup.querySelector('.popup__image');
 const imageName = imagePopup.querySelector('.popup__image-caption');
-const popupImageCloseBtn = imagePopup.querySelector('.popup__close-btn');
+
 
 //Элементы профиля
 const profileEditBtn = document.querySelector('.profile__edit-btn');
@@ -28,7 +28,8 @@ const profileAbout = document.querySelector('.profile__about');
 const placeTemplate = document.querySelector('.place-template').content;
 const placeList = document.querySelector('.places__list');
 
-
+//Получаю все элементы с классом '.popup' для того чтобы ниже навесить на них и их дочерние элементы слушатели события
+const popups = document.querySelectorAll('.popup')
 
 // Массив с местами
 const initialPlaces = [
@@ -91,7 +92,7 @@ function addToMarkup(el){
 
 
 
-
+//Тут отрисовываются на странице карточки, которые должны быть при первой загрузке страницы
 initialPlaces.forEach((item) => {
   const newCard = createCard(item)
   addToMarkup(newCard)
@@ -158,26 +159,7 @@ function addPlace(e){
   resetFormError(popupAdd, validConfig);
 };
 
-
-//Общие функции для попапов
-//Открыть попап
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-  popup.addEventListener('mousedown', closePopupByOverlay)
-};
-
-
-
-
-//Закрыть попап
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  //Уберу слушатель события, чтобы избежать бага повторным нажатием на клавишу при закрытом попапе
-  document.removeEventListener('keydown', closePopupByEsc)
-};
-
-// Функции ниже не являются основной логикой страницы. Они улучшают user experience
+// Функция не является основной логикой страницы. Она улучшает user experience
 function closePopupByEsc(e){
   if(e.key === 'Escape'){
     const openedPopup = document.querySelector('.popup_opened');
@@ -185,12 +167,39 @@ function closePopupByEsc(e){
   };
 };
 
-
-function closePopupByOverlay(e){
-    if(e.target.classList.contains('popup')){
-      closePopup(e.target)
-    }
+//Общие функции для попапов
+//Открыть попап
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
 };
+
+//Закрыть попап
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  //Уберу слушатель события, чтобы избежать бага повторным нажатием на клавишу при закрытом попапе
+  document.removeEventListener('keydown', closePopupByEsc);
+};
+
+
+
+
+// Здесь вешаются слушатели события на все оверлеи попапов и кнопки их закрытия
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) {
+          closePopup(popup)
+      };
+      if (evt.target.classList.contains('popup__close-btn')) {
+        closePopup(popup)
+      };
+  });
+});
+
+
+
+
+
 
 
 // Слушатели события
@@ -198,8 +207,3 @@ profileEditBtn.addEventListener('click', openEditPopup);
 formEdit.addEventListener('submit', saveProfile);
 profileAddBtn.addEventListener('click', openAddPopup);
 formAdd.addEventListener('submit', addPlace);
-popupEditCloseBtn.addEventListener('click', () => {closePopup(popupEdit)});
-popupAddCloseBtn.addEventListener('click', () => {closePopup(popupAdd)});
-popupImageCloseBtn.addEventListener('click', () => {closePopup(imagePopup)});
-
-
