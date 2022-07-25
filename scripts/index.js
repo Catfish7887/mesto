@@ -1,3 +1,6 @@
+import FormValidator from './formValidator.js'
+import {validConfig, initialPlaces} from './data.js'; 
+import Card from './card.js';
 // ПЕРЕМЕННЫЕ
 //Popup edit
 const popupEdit = document.querySelector('.popup_type_edit');
@@ -24,89 +27,48 @@ const profileEditBtn = document.querySelector('.profile__edit-btn');
 const profileAddBtn = document.querySelector('.profile__add-btn');
 const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
-//Карточки с местами
-const placeTemplate = document.querySelector('.place-template').content;
+
+
 const placeList = document.querySelector('.places__list');
 
-//Получаю все элементы с классом '.popup' для того чтобы ниже навесить на них и их дочерние элементы слушатели события
 const popups = document.querySelectorAll('.popup')
 
-// Массив с местами
-const initialPlaces = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const addForm = document.querySelector('#add-form')
+const addFormVl = new FormValidator(validConfig, addForm)
+const editForm = document.querySelector('#edit-form')
+const editFormVl = new FormValidator(validConfig, editForm)
 
 
 
+function render(element){
+  placeList.prepend(element)
+}
+
+function createNewCard(data, func){
+  const card = new Card(data, func)
+  const newCard = card.createCard()
+  render(newCard)
+}
 
 
-//ФУНКЦИИ
-//Создать карточку с местом
-function createCard(item){
-  const newPlace = placeTemplate.querySelector('.place').cloneNode(true);
-  const placeImage = newPlace.querySelector('.place__image');
-  const placeName = newPlace.querySelector('.place__name');
-  const btnDelete = newPlace.querySelector('.place__delete-btn');
-  const btnLike = newPlace.querySelector('.place__like-btn');
 
-  placeName.textContent = item.name;
-  placeImage.src = item.link;
-  placeImage.alt = item.name
-
-  btnDelete.addEventListener('click', deletePlace);
-  btnLike.addEventListener('click', like);
-  placeImage.addEventListener('click', () => {openImagePopup(item.name, item.link)});
+initialPlaces.forEach(item=>{
+  createNewCard(item, openImagePopup)
+})
 
 
-  return newPlace;
+function addPlace(e){
+  e.preventDefault();
+  const newData = {}
+  newData.name = placeNameInput.value;
+  newData.link = urlInput.value;
+
+  createNewCard(newData, openImagePopup)
+  formAdd.reset();
+
+  closePopup(popupAdd);
 };
 
-//Добавить карточку в DOM
-function addToMarkup(el){
-
-  placeList.prepend(el)
-};
-
-
-
-//Тут отрисовываются на странице карточки, которые должны быть при первой загрузке страницы
-initialPlaces.forEach((item) => {
-  const newCard = createCard(item)
-  addToMarkup(newCard)
-});
-
-// Функция для лайка
-function like(e){
-  e.target.classList.toggle('place__like-btn_active');
-};
-
-// Функция для удаления места
-function deletePlace(e){
-  e.target.closest('.place').remove();
-};
 
 //Открыть попап с картинкой
 function openImagePopup(name, link){
@@ -121,14 +83,14 @@ function openEditPopup(){
   openPopup(popupEdit);
   nameInput.value = profileName.innerText;
   aboutInput.value = profileAbout.innerText;
-  resetFormError(popupEdit, validConfig)
+  editFormVl.resetFormError()
 };
 
 //Открыть попап добавления места
 function openAddPopup(){
   formAdd.reset()
   openPopup(popupAdd);
-  resetFormError(popupAdd, validConfig);
+  addFormVl.resetFormError()
 };
 
 //Сохранить изменения профиля
@@ -140,24 +102,6 @@ function saveProfile(e){
 };
 
 //Отправка формы нового места
-function addPlace(e){
-  e.preventDefault();
-  const newAddedPlace = {
-    name: '',
-    link: ''
-  }
-
-  newAddedPlace.name = placeNameInput.value;
-  newAddedPlace.link = urlInput.value;
-
-
-  const newCreatedCard = createCard(newAddedPlace);
-  addToMarkup(newCreatedCard);
-  formAdd.reset();
-
-  closePopup(popupAdd);
-  resetFormError(popupAdd, validConfig);
-};
 
 // Функция не является основной логикой страницы. Она улучшает user experience
 function closePopupByEsc(e){
@@ -196,9 +140,9 @@ popups.forEach((popup) => {
   });
 });
 
-
-
-
+//Включаю валидацию форм
+editFormVl.enableValidation()
+addFormVl.enableValidation()
 
 
 
