@@ -1,15 +1,18 @@
 class Card{
-  static _template = document.querySelector('.place-template').content
-
-  constructor(item, popupFunction){
-    this._cardImage = item.link
-    this._cardName = item.name
-    this._function = popupFunction
-
+  constructor(item, popupFunction, template){
+    this._image = item.link
+    this._name = item.name
+    this._handleCardClick = popupFunction
+    this._template = template
   };
 
+  _getTemplate(){
+   return this._template.cloneNode(true).children[0];
+
+  }
+
   _like(){
-    this._card.querySelector('.place__like-btn').classList.toggle('place__like-btn_active');
+    this._likeButton.classList.toggle('place__like-btn_active');
   };
 
   _deleteCard(){
@@ -17,28 +20,29 @@ class Card{
   };
 
   _openPopup(){
-    this._function(this._cardName, this._cardImage)
+    this._handleCardClick(this._name, this._image)
   }
 
   _addListeners(){
     this._card.querySelector('.place__delete-btn').addEventListener('click', ()=>{this._deleteCard()})
-    this._card.querySelector('.place__like-btn').addEventListener('click', ()=>{this._like()});
-    this._card.querySelector('.place__image').addEventListener('click', ()=>{this._openPopup()})
+    this._likeButton.addEventListener('click', ()=>{this._like()});
+    this._cardImage.addEventListener('click', ()=>{this._openPopup()})
   };
 
   createCard(){
-    this._card = Card._template.cloneNode(true).children[0];
-    this._card.querySelector('.place__name').textContent = this._cardName;
-    this._card.querySelector('.place__image').src = this._cardImage;
-    this._card.querySelector('.place__image').alt = this._cardName;
+    this._card = this._getTemplate();
+    this._cardImage = this._card.querySelector('.place__image');
+    this._likeButton = this._card.querySelector('.place__like-btn');
+
+
+    this._card.querySelector('.place__name').textContent = this._name;
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._name;
     this._addListeners();
     return this._card;
 
 
   };
-
-
-
 
 };
 
