@@ -1,0 +1,23 @@
+{
+  "name": "mesto-1",
+  "version": "1.0.0",
+  "description": "* Мой учебный проект с курсов Яндекса",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Catfish7887/mesto.git"
+  },
+  "author": "Daniil Kleutin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Catfish7887/mesto/issues"
+  },
+  "homepage": "https://github.com/Catfish7887/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
