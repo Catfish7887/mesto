@@ -30,9 +30,9 @@ class FormValidator {
 
   _isInputValid(formEl, inputEl, config){
     if(!inputEl.validity.valid){
-      this.showInputError(formEl, inputEl, inputEl.validationMessage, config);
+      this._showInputError(formEl, inputEl, inputEl.validationMessage, config);
     }else{
-      this.hideInputError(formEl, inputEl, config);
+      this._hideInputError(formEl, inputEl, config);
     };
   };
 
@@ -42,7 +42,38 @@ class FormValidator {
     });
   };
 
+  _setEvListeners(formEl, config){
+    const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
+    const buttonEl = formEl.querySelector(config.submitButtonSelector);
 
+    this._toggleButtonState(inputList, buttonEl, config);
+
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', function () {
+        this._isInputValid(formEl, inputElement, config);
+        this._toggleButtonState(inputList, buttonEl, config);
+      });
+    });
+  };
+
+  _resetFormError(popup, config){
+    const formEl = popup.querySelector(config.formSelector);
+    const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
+    const buttonEl = formEl.querySelector(config.submitButtonSelector);
+
+    inputList.forEach( (inputEl) => {this._hideInputError(formEl, inputEl, config)});
+
+    this._toggleButtonState(inputList, buttonEl, config);
+  };
+
+  _enableValidation(config){
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+    formList.forEach((formEl)=>{
+        this._setEvListeners(formEl, config)
+        formEl.addEventListener('submit', (e)=>{e.preventDefault();})
+    })
+  };
 
 };
 
@@ -61,7 +92,7 @@ class FormValidator {
 
 
 
-//Показывает сообщение об ошибке
+/* //Показывает сообщение об ошибке
 const showInputError = (formEl, inputEl, validationMessage, config) => {
   const errorEl = formEl.querySelector(`.${inputEl.id}-error`);
   errorEl.textContent = validationMessage;
@@ -107,42 +138,12 @@ const hasInvalidInput = (inputList) => {
 
 
 //Здесь я установил слушатели события на все поля форм в документе
-const setEvListeners = (formEl, config) => {
-  const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
-  const buttonEl = formEl.querySelector(config.submitButtonSelector);
-
-  toggleButtonState(inputList, buttonEl, config);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      isInputValid(formEl, inputElement, config);
-      toggleButtonState(inputList, buttonEl, config);
-    });
-  });
-};
 
 //При открытии модального окна, нужно сбрасывать ошибки
-const resetFormError = (popup, config) => {
-  const formEl = popup.querySelector(config.formSelector);
-  const inputList = Array.from(formEl.querySelectorAll(config.inputSelector));
-  const buttonEl = formEl.querySelector(config.submitButtonSelector);
-
-  inputList.forEach( (inputEl) => {hideInputError(formEl, inputEl, config)});
-
-  toggleButtonState(inputList, buttonEl, config);
-};
 
 
-
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-
-  formList.forEach((formEl)=>{
-      setEvListeners(formEl, config)
-      formEl.addEventListener('submit', (e)=>{e.preventDefault();})
-  })
-};
 
 
 //Включаю валидацию форм с помощью JS
 enableValidation(validConfig);
+ */
