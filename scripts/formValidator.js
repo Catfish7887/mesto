@@ -38,11 +38,11 @@ class FormValidator{
 
   _toggleButtonState(){
     if(this._hasInvalidInput()){
-      this._submitButton.setAttribute('disabled', true)
-      this._submitButton.classList.add(this._config.inactiveButtonClass)
+      this._submitButton.setAttribute('disabled', true);
+      this._submitButton.classList.add(this._config.inactiveButtonClass);
     }else{
-      this._submitButton.removeAttribute('disabled', true)
-      this._submitButton.classList.remove(this._config.inactiveButtonClass)
+      this._submitButton.removeAttribute('disabled', true);
+      this._submitButton.classList.remove(this._config.inactiveButtonClass);
     };
   };
 
@@ -63,7 +63,7 @@ class FormValidator{
     this._inputList.forEach( (inputEl) => {this._hideInputError(inputEl)});
     this._toggleButtonState();
 
-  }
+  };
 };
 
 export default FormValidator;

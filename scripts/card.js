@@ -1,32 +1,32 @@
 class Card{
   constructor(item, popupFunction, template){
-    this._image = item.link
-    this._name = item.name
-    this._handleCardClick = popupFunction
-    this._template = template
+    this._image = item.link;
+    this._name = item.name;
+    this._handleCardClick = popupFunction;
+    this._template = template;
   };
 
   _getTemplate(){
    return this._template.cloneNode(true).children[0];
 
-  }
+  };
 
   _like(){
     this._likeButton.classList.toggle('place__like-btn_active');
   };
 
   _deleteCard(){
-    this._card.remove()
+    this._card.remove();
   };
 
   _openPopup(){
-    this._handleCardClick(this._name, this._image)
-  }
+    this._handleCardClick(this._name, this._image);
+  };
 
   _addListeners(){
-    this._card.querySelector('.place__delete-btn').addEventListener('click', ()=>{this._deleteCard()})
+    this._card.querySelector('.place__delete-btn').addEventListener('click', ()=>{this._deleteCard()});
     this._likeButton.addEventListener('click', ()=>{this._like()});
-    this._cardImage.addEventListener('click', ()=>{this._openPopup()})
+    this._cardImage.addEventListener('click', ()=>{this._openPopup()});
   };
 
   createCard(){

@@ -36,4 +36,4 @@ const initialPlaces = [
   }
 ];
 
-export {validConfig, initialPlaces}
+export {validConfig, initialPlaces};
