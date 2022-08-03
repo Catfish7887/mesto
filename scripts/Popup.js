@@ -5,6 +5,7 @@ export default class Popup {
 
   open(){
     this._popupSelector.classList.add('popup_opened');
+    this._popupSelector.addEventListener('keydown', this._handleEscClose());
   };
 
   close(){
@@ -20,7 +21,6 @@ export default class Popup {
   setEventListeners(){
     this._popupSelector.addEventListener('click', this.close());
     this._popupSelector.addEventListener('mousedown', this.close());
-    this._popupSelector.addEventListener('keydown', this._handleEscClose());
 
   }
 };

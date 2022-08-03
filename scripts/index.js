@@ -1,6 +1,7 @@
 import FormValidator from './FormValidator.js'
 import {validConfig, initialPlaces} from './data.js';
 import Card from './Card.js';
+import Section from './Section.js';
 
 
 // ПЕРЕМЕННЫЕ
@@ -48,7 +49,10 @@ const enableValidation = (config) => {
   });
 };
 
-
+const cardList = new Section({
+  data: initialPlaces,
+  renderer: ()=>{}
+})
 
 function render(element){
   placeList.prepend(element)
