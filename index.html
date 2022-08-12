@@ -39,12 +39,10 @@
     <div class="popup__container">
       <form id="edit-form" name="editForm" class="popup__form" novalidate>
         <h2 class="popup__name">Редактировать профиль</h2>
-        <!-- <fieldset class="popup__form-fieldset"> -->
             <input id="name" name="name" minlength="2" maxlength="40" type="text" placeholder="Имя" class="popup__input" required>
             <span class="popup__input-error name-error"></span>
             <input id="about" name="about" type="text" placeholder="Обо мне" minlength="2" maxlength="200" class="popup__input" required>
             <span class="popup__input-error about-error"></span>
-        <!-- </fieldset> -->
         <button id="edit-form-submit" type="submit" class="popup__submit-btn">Сохранить</button>
       </form>
       <button type="button" aria-label="Закрыть" class="popup__close-btn"></button>
@@ -55,12 +53,10 @@
     <div class="popup__container">
       <form id="add-form" name="cardForm" class="popup__form" novalidate>
         <h2 class="popup__name">Новое место</h2>
-        <!-- <fieldset class="popup__form-fieldset"> -->
-            <input id="place-name" name="place-name" type="text" class="popup__input" placeholder="Название" minlength="2" maxlength="30" required>
+            <input id="place-name" name="name" type="text" class="popup__input" placeholder="Название" minlength="2" maxlength="30" required>
             <span class="popup__input-error place-name-error"></span>
-            <input id="url" name="url" type="url" class="popup__input" placeholder="Ссылка на картинку" required>
+            <input id="url" name="link" type="url" class="popup__input" placeholder="Ссылка на картинку" required>
             <span class="popup__input-error url-error"></span>
-        <!-- </fieldset> -->
         <button type="submit" class="popup__submit-btn ">Создать</button>
       </form>
       <button type="button" aria-label="Закрыть" class="popup__close-btn"></button>
@@ -87,10 +83,16 @@
     </li>
   </template>
 
-  <script src="./scripts/index.js" type="module"></script>
-  <script src="./scripts/formValidator.js" type="module"></script>
-  <script src="./scripts/data.js" type="module"></script>
-  <script src="./scripts/card.js" type="module"></script>
+  <script src="./pages/index.js" type="module"></script>
+  <script src="./utils/data.js" type="module"></script>
+  <script src="./utils/constants.js" type="module"></script>
+  <script src="./components/FormValidator.js" type="module"></script>
+  <script src="./components/Сard.js" type="module"></script>
+  <script src="./components/Section.js" type="module"></script>
+  <script src="./components/Popup.js" type="module"></script>
+  <script src="./components/PopupWithForm.js" type="module"></script>
+  <script src="./components/PopupWithImage.js" type="module"></script>
+  <script src="./components/UserInfo.js" type="module"></script>
 </body>
 
 </html>
