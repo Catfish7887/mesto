@@ -17,6 +17,7 @@ class Card{
 
   _deleteCard(){
     this._card.remove();
+    this._card = null;
   };
 
   _openPopup(){
@@ -24,9 +25,9 @@ class Card{
   };
 
   _addListeners(){
-    this._card.querySelector('.place__delete-btn').addEventListener('click', ()=>{this._deleteCard()});
-    this._likeButton.addEventListener('click', ()=>{this._like()});
-    this._cardImage.addEventListener('click', ()=>{this._openPopup()});
+    this._card.querySelector('.place__delete-btn').addEventListener('click', () => this._deleteCard ());
+    this._likeButton.addEventListener('click', () => this._like ());
+    this._cardImage.addEventListener('click', () => this._openPopup ());
   };
 
   createCard(){
