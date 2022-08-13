@@ -22,15 +22,15 @@ import{ popupEdit,
 
 
 
-const profile = new UserInfo({userName: profileName, about: profileAbout})
+const profile = new UserInfo({userName: '.profile__name', about: '.profile__about'})
 
-const popupWithImage = new PopupWithImage(imagePopup)
+const popupWithImage = new PopupWithImage('.popup_type_image')
 popupWithImage.setEventListeners()
 
-const popupWithFormAdd = new PopupWithForm(popupAdd, addPlace)
+const popupWithFormAdd = new PopupWithForm('.popup_type_add', addPlace)
 popupWithFormAdd.setEventListeners()
 
-const popupWithFormEdit = new PopupWithForm(popupEdit, saveProfile)
+const popupWithFormEdit = new PopupWithForm('.popup_type_edit', saveProfile)
 popupWithFormEdit.setEventListeners()
 
 
@@ -49,7 +49,7 @@ const enableValidation = (config) => {
 const cardList = new Section({
   items: initialPlaces,
   renderer: (item) =>{
-    const card = createCard(placeTemplate, item, openImagePopup)
+    const card = createCard(item)
     cardList.addItem(card)
   }
 
@@ -58,15 +58,14 @@ const cardList = new Section({
 cardList.renderAll()
 
 
-function createCard(template, data, func){
-  const card = new Card(data, func, template);
-  const cardElement = card.createCard();
-  return cardElement;
+function createCard(data) {
+  const card = new Card(data, openImagePopup, placeTemplate);
+  return card.createCard()
 };
 
 
 function addPlace(data){
-  const newCard = createCard(placeTemplate, data, openImagePopup)
+  const newCard = createCard(data)
   cardList.addItem(newCard)
   // debugger
   popupWithFormAdd.close()
@@ -100,13 +99,8 @@ function saveProfile(){
   popupWithFormEdit.close()
 };
 
-
-//Включаю валидацию форм
 enableValidation(validConfig);
 
-
-
-// Слушатели события
 profileEditBtn.addEventListener('click', openEditPopup);
 profileAddBtn.addEventListener('click', openAddPopup);
 
