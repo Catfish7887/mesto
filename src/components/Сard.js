@@ -3,7 +3,7 @@ class Card{
     this._image = item.link;
     this._name = item.name;
     this._handleCardClick = popupFunction;
-    this._template = template;
+    this._template = document.querySelector(template).content;
   };
 
   _getTemplate(){
