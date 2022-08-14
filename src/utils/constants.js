@@ -12,8 +12,4 @@ export const profileAddBtn = document.querySelector('.profile__add-btn');
 export const profileName = document.querySelector('.profile__name');
 export const profileAbout = document.querySelector('.profile__about');
 
-export const placeTemplate = document.querySelector('.place-template').content;
-
-export const placeList = document.querySelector('.places__list');
-
 export const formValidators = {};

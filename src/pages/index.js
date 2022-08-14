@@ -6,21 +6,13 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import{ popupEdit,
-  nameInput,
+import{nameInput,
   aboutInput,
-  popupAdd,
   formAdd,
-  imagePopup,
   profileEditBtn,
   profileAddBtn,
-  profileName,
-  profileAbout,
-  placeTemplate,
-  placeList,
-  formValidators } from '../utils/constants.js'
-
-
+  formValidators }
+from '../utils/constants.js'
 
 const profile = new UserInfo({userName: '.profile__name', about: '.profile__about'})
 
@@ -53,13 +45,13 @@ const cardList = new Section({
     cardList.addItem(card)
   }
 
-}, placeList)
+}, '.places__list')
 
 cardList.renderAll()
 
 
 function createCard(data) {
-  const card = new Card(data, openImagePopup, placeTemplate);
+  const card = new Card(data, openImagePopup, '.place-template');
   return card.createCard()
 };
 
