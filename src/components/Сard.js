@@ -15,17 +15,17 @@ class Card{
     this._likeButton.classList.toggle('place__like-btn_active');
   };
 
-  _deleteCard(){
-    this._card.remove();
-    this._card = null;
-  };
+  // _deleteCard(){
+  //   this._card.remove();
+  //   this._card = null;
+  // };
 
   _openPopup(){
     this._handleCardClick(this._name, this._image);
   };
 
   _addListeners(){
-    this._card.querySelector('.place__delete-btn').addEventListener('click', () => this._deleteCard ());
+    // this._card.querySelector('.place__delete-btn').addEventListener('click', () => this._deleteCard ());
     this._likeButton.addEventListener('click', () => this._like ());
     this._cardImage.addEventListener('click', () => this._openPopup ());
   };

@@ -1,11 +1,14 @@
 import './index.css'
 import FormValidator from '../components/FormValidator.js'
-import {validConfig, initialPlaces} from '../utils/data.js';
+import {validConfig, apiConfig} from '../utils/data.js';
 import Card from '../components/Сard.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithError from '../components/PopupWithError';
 import UserInfo from '../components/UserInfo.js';
+import Api from '../components/Api';
+import UserCard from '../components/UserCard';
 import{nameInput,
   aboutInput,
   formAdd,
@@ -14,7 +17,12 @@ import{nameInput,
   formValidators }
 from '../utils/constants.js'
 
-const profile = new UserInfo({userName: '.profile__name', about: '.profile__about'})
+const api = new Api(apiConfig)
+
+const profile = new UserInfo('.profile__avatar', {userName: '.profile__name', about: '.profile__about'})
+
+const popupWithError = new PopupWithError('.popup_type_error');
+popupWithError.setEventListeners()
 
 const popupWithImage = new PopupWithImage('.popup_type_image')
 popupWithImage.setEventListeners()
@@ -38,22 +46,19 @@ const enableValidation = (config) => {
   });
 };
 
-const cardList = new Section({
-  items: initialPlaces,
-  renderer: (item) =>{
-    const card = createCard(item)
-    cardList.addItem(card)
-  }
-
-}, '.places__list')
-
-cardList.renderAll()
-
-
-function createCard(data) {
-  const card = new Card(data, openImagePopup, '.place-template');
+function createUserCard(data) {
+  const card = new UserCard(data, openImagePopup, '.user-card-template');
   return card.createCard()
 };
+
+function createServerCard(data){
+  const card = new Card(data, openImagePopup, '.server-card-template')
+  return card.createCard()
+}
+
+
+
+
 
 
 function addPlace(data){
@@ -87,12 +92,42 @@ function openAddPopup(){
 
 //Сохранить изменения профиля
 function saveProfile(){
+  api.editProfile({name: nameInput.value, about: aboutInput.value}).catch(err=>popupWithError.open(err))
   profile.setUserInfo(nameInput, aboutInput)
   popupWithFormEdit.close()
 };
 
-enableValidation(validConfig);
+
+
+
+
+// Загружаю с сервера карточки
+api.getInitialCards().then(data => {
+const cardList = new Section({
+    items: data,
+    renderer: (item) =>{
+      const card = createServerCard(item)
+      cardList.addItem(card)
+    }
+
+  }, '.places__list')
+
+  cardList.renderAll()
+})
+.catch(err =>popupWithError.open(err))
+
+// Загружаю с сервера данные профиля
+api.getProfile().then(data=>{
+  profile.renderInfo(data)
+  profile.renderAvatar(data)
+  })
+  .catch(err=>popupWithError.open(err))
+
+  enableValidation(validConfig);
+
+
 
 profileEditBtn.addEventListener('click', openEditPopup);
 profileAddBtn.addEventListener('click', openAddPopup);
+
 
