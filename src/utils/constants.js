@@ -12,4 +12,6 @@ export const profileAddBtn = document.querySelector('.profile__add-btn');
 export const profileName = document.querySelector('.profile__name');
 export const profileAbout = document.querySelector('.profile__about');
 
+export let userId = null;
+
 export const formValidators = {};

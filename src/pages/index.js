@@ -14,8 +14,9 @@ import{nameInput,
   formAdd,
   profileEditBtn,
   profileAddBtn,
-  formValidators }
+  formValidators, }
 from '../utils/constants.js'
+
 
 const api = new Api(apiConfig)
 
@@ -32,6 +33,16 @@ popupWithFormAdd.setEventListeners()
 
 const popupWithFormEdit = new PopupWithForm('.popup_type_edit', saveProfile)
 popupWithFormEdit.setEventListeners()
+
+
+// Получаю ID пользователя с помощью запроса информации пользователя
+let userId;
+
+
+function getUserId(promiseData){
+  userId = promiseData;
+}
+
 
 
 // Включение валидации
@@ -52,8 +63,9 @@ function createUserCard(data) {
 };
 
 function createServerCard(data){
-  const card = new Card(data, openImagePopup, '.server-card-template')
-  return card.createCard()
+  debugger
+  const card = new Card(data, openImagePopup, '.card-template')
+  return card.createCard(userId)
 }
 
 
@@ -100,6 +112,14 @@ function saveProfile(){
 
 
 
+// Загружаю с сервера данные профиля
+api.getProfile()
+.then(data=>{
+  profile.renderInfo(data)
+  profile.renderAvatar(data)
+  getUserId(data._id)
+  })
+.catch(err=>popupWithError.open(err))
 
 // Загружаю с сервера карточки
 api.getInitialCards().then(data => {
@@ -116,15 +136,8 @@ const cardList = new Section({
 })
 .catch(err =>popupWithError.open(err))
 
-// Загружаю с сервера данные профиля
-api.getProfile().then(data=>{
-  profile.renderInfo(data)
-  profile.renderAvatar(data)
-  })
-  .catch(err=>popupWithError.open(err))
 
-  enableValidation(validConfig);
-
+enableValidation(validConfig);
 
 
 profileEditBtn.addEventListener('click', openEditPopup);

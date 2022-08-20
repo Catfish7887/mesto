@@ -33,6 +33,7 @@ class Api{
     .then(res => this._handleResponce(res))
   }
 
+
   getProfile(){
     return fetch(`${this._url}/users/me`,{
       headers: this._headers
