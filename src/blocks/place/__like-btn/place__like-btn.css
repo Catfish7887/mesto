@@ -7,16 +7,10 @@
   transition: opacity 0.8s ease;
   cursor: pointer;
   background-color: transparent;
-  margin-right: 4px;
 }
 
 .place__like-btn:hover{
   opacity: 0.5;
 }
 
-@media screen and (max-width: 779px) {
-  .place__like-btn{
-    margin-right: 5px;
-  }
-}
 

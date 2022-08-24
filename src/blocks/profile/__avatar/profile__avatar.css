@@ -3,9 +3,10 @@
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  position: relative;
+  box-sizing: border-box;
 }
 
-.profile__avatar::before:hover{
-  background-color: azure;
-}
+
+
 
