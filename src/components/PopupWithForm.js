@@ -13,7 +13,6 @@ export default class PopupWithForm extends Popup{
 
   open(){
     super.open()
-    this.showLoading(false)
   }
 
   _getInputValues(){
@@ -37,6 +36,17 @@ export default class PopupWithForm extends Popup{
     this._form.reset()
     // this.showLoading(false)
   }
+
+
+  setInputValues(data) {
+    this._inputs.forEach((input) => {
+      input.value = data[input.name];
+    });
+  }
+
+
+
+
 
   setEventListeners(){
     super.setEventListeners()

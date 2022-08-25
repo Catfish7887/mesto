@@ -28,8 +28,7 @@ class Card {
 
   _like() {
     this._refreshLikeState() //Проверка состояния This._isLiked. Если true, то выполнится метод DELETE у лайка
-    this._likeCallback(this._isLiked, this._data._id, this._likeCounter)
-    this._likeButton.classList.toggle('place__like-btn_active')
+    this._likeCallback(this._isLiked, this._data._id, this._likeCounter, this._likeButton)
     this._refreshLikeState()
   };
 
@@ -60,7 +59,7 @@ class Card {
   };
 
 
-  createCard(id) {
+  createCard() {
     this._card = this._getTemplate();
     this._cardImage = this._card.querySelector('.place__image');
     this._likeButton = this._card.querySelector('.place__like-btn');
@@ -72,7 +71,7 @@ class Card {
     this._cardImage.alt = this._name;
     this._likeCounter.textContent = this._likes
 
-    if (id === this._data.owner._id) {
+    if (this._ownerId === this._data.owner._id) {
       this._deleteButton.addEventListener('click', () => this._deleteCard())
 
     } else {

@@ -23,7 +23,7 @@ import { data } from 'autoprefixer';
 
 const api = new Api(apiConfig)
 
-const cardList = new Section({}, '.places__list')
+const cardList = new Section({renderer: renderNewCard}, '.places__list')
 
 const profile = new UserInfo('.profile__avatar', { userName: '.profile__name', about: '.profile__about' })
 
@@ -43,34 +43,40 @@ const popupWithFormEdit = new PopupWithForm('.popup_type_edit', saveProfile)
 popupWithFormEdit.setEventListeners()
 
 
-// Получаю ID пользователя с помощью запроса информации пользователя
+
+const getProfileInfo = api.getProfile()
+const getCards = api.getInitialCards()
+
 let userId;
 
-api.getProfile()
-.then(data => {
-  profile.renderInfo(data)
-  profile.renderAvatar(data)
-  getUserId(data._id)
-})
-.catch(err =>console.log(err))
+Promise.all([getProfileInfo, getCards])
+.then(([profileData, cards])=>{
 
+  profile.renderInfo(profileData);
+  profile.renderAvatar(profileData);
+  getUserId(profileData._id);
 
-api.getInitialCards().then(data => {
-  const cardList = new Section({
-    items: data.reverse(),
-    renderer: (item) => {
-      const card = createCard(item)
-      cardList.addItem(card)
-    }
+  cardList.renderAll(cards.reverse())
+}).catch(err=>console.log(err))
 
-  }, '.places__list')
-  cardList.renderAll()
-})
-.catch(err =>console.log(err))
 
 
 function getUserId(promiseData) {
   userId = promiseData;
+}
+
+
+//Вынес логику renderer класса Section в отдельную функцию, чтобы код выглядел аккуратнее.
+//Так же заменил ту же самую логику в сабмите формы добавления карточки на эту функцию.
+function renderNewCard(data) {
+  const card = createCard(data);
+  cardList.addItem(card);
+}
+
+
+function createCard(data) {
+  const card = new Card(data, openImagePopup, '.card-template', userId, like, openDeletePopup)
+  return card.createCard()
 }
 
 
@@ -87,14 +93,13 @@ const enableValidation = (config) => {
 };
 
 
-function createCard(data) {
-  const card = new Card(data, openImagePopup, '.card-template', userId, like, openDeletePopup)
-  return card.createCard(userId)
-}
-
-
-function deleteCard(cardId){
-  api.deleteCardById(cardId).catch(err =>console.log(err))
+function deleteCard(cardId, cardEl){
+  api.deleteCardById(cardId)
+  .then(()=>{
+    cardList.removeItem(cardEl)
+    popupWithButton.close()
+  })
+  .catch(err=>console.log(err))
 }
 
 
@@ -103,28 +108,32 @@ function openDeletePopup(id, card){
 }
 
 
-function like(isLiked, cardId, likeCounter) {
+function like(isLiked, cardId, likeCounter, likeButton) {
   if (!isLiked) {
     api.like(cardId).then(res => {
       likeCounter.textContent = res.likes.length
-    }).catch(err =>console.log(err))
+      likeButton.classList.toggle('place__like-btn_active')
+
+    })
+    .catch(err =>console.log(err))
+
   } else {
     api.dislike(cardId).then(res => {
       likeCounter.textContent = res.likes.length
-    }).catch(err =>console.log(err))
+      likeButton.classList.toggle('place__like-btn_active')
+    })
+    .catch(err =>console.log(err))
 }
-
 }
 
 function changeAvatar(data) {
   api.changeAvatar(data)
-    .then(popupWithAvatar.showLoading(true))
     .then(data => {
       profile.renderAvatar(data)
       popupWithAvatar.close()
     })
     .catch(err =>console.log(err))
-    .finally(popupWithAvatar.showLoading(false))
+    .finally(()=>popupWithAvatar.showLoading(false))
 }
 
 
@@ -132,12 +141,11 @@ function addPlace(data) {
   api.createCard(data)
     .then(popupWithFormAdd.showLoading(true))
     .then(data => {
-      const card = createCard(data);
-      cardList.addItem(card);
+      renderNewCard(data)
       popupWithFormAdd.close()
     })
     .catch(err =>console.log(err))
-    .finally(popupWithFormAdd.showLoading(false))
+    .finally(()=>popupWithFormAdd.showLoading(false))
 };
 
 
@@ -155,8 +163,7 @@ function openAvatarPopup() {
 function openEditPopup() {
   popupWithFormEdit.open()
   const values = profile.getUserInfo()
-  aboutInput.value = values.about
-  nameInput.value = values.name
+  popupWithFormEdit.setInputValues(values)
   formValidators['editForm'].resetValidation()
 };
 
@@ -172,13 +179,12 @@ function openAddPopup() {
 //Сохранить изменения профиля
 function saveProfile() {
   api.editProfile({ name: nameInput.value, about: aboutInput.value })
-  .then(popupWithFormEdit.showLoading(true))
-  .then(
+  .then(()=>{
     profile.setUserInfo(nameInput, aboutInput),
     popupWithFormEdit.close()
-  )
+  })
   .catch(err =>console.log(err))
-  .finally(popupWithFormEdit.showLoading(false))
+  .finally(()=>popupWithFormEdit.showLoading(false))
 
 };
 
